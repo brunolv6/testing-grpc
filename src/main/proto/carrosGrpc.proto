@@ -5,16 +5,25 @@ option java_package = "br.com.zup.edu";
 option java_outer_classname = "CarrosGrpc";
 option objc_class_prefix = "HLW";
 
+import "google/protobuf/any.proto";
+
 package br.com.zup.edu;
 
-service CarrosGrpcService {
-  rpc send (CarrosGrpcRequest) returns (CarrosGrpcReply) {}
+service CarrosService {
+  rpc send (CarrosRequest) returns (CarrosResponse) {}
 }
 
-message CarrosGrpcRequest {
-  string name = 1;
+message ErrorDetails{
+  int32 code = 1;
+  string message = 2;
+  repeated google.protobuf.Any details = 3;
 }
 
-message CarrosGrpcReply {
-  string message = 1;
+message CarrosRequest {
+  string placa = 1;
+  string modelo = 2;
+}
+
+message CarrosResponse {
+  int64 id = 1;
 }

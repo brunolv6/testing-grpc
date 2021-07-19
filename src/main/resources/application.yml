@@ -3,10 +3,22 @@ micronaut:
     name: carrosGrpc
 datasources:
   default:
-    url: jdbc:mysql://localhost:3306/db
+    url: jdbc:mysql://localhost:3306/grpc_testes?createDatabaseIfNotExist=true&serverTimezone=UTC
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
-    password: ''
-    schema-generate: CREATE_DROP
+    password: my$ql
+    schema-generate: UPDATE
     dialect: MYSQL
-jpa.default.properties.hibernate.hbm2ddl.auto: update
+
+jpa:
+  default:
+    properties:
+      hibernate.hbm2ddl.auto: update
+      hibernate.show_sql: true
+      hibernate.format_sql: true
+
+#habilita log no contexto transacional
+logger:
+  levels:
+    io.micronaut.transaction: DEBUG
+
